@@ -12,41 +12,66 @@ import android.widget.Toast;
 public class MainActivity extends AppCompatActivity {
 
     String name;
+    int score;
+    EditText username;
+    RadioButton firstFirst;
+    CheckBox firstCheckbox;
+    CheckBox secondCheckbox;
+    CheckBox thirdCheckbox;
+    CheckBox fourthCheckbox;
+    EditText sequenceNumber;
+    EditText oddNumber;
+    EditText evenNumber;
+    RadioButton sixthFirst;
+    RadioButton seventhFirst;
+    RadioButton eighthFirst;
+
+
+
+    View button;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        View button = (View) findViewById(R.id.score_button);
-        button.startAnimation(AnimationUtils.loadAnimation(this, R.anim.pulse));
+        button = (View) findViewById(R.id.score_button);
 
+        firstFirst = (RadioButton) findViewById(R.id.firstfirst);
+        firstCheckbox = (CheckBox) findViewById(R.id.first_checkbox);
+        secondCheckbox = (CheckBox) findViewById(R.id.second_checkbox);
+        thirdCheckbox = (CheckBox) findViewById(R.id.third_checkbox);
+        fourthCheckbox = (CheckBox) findViewById(R.id.fourth_checkbox);
+        sequenceNumber = (EditText) findViewById(R.id.sequence_number);
+        oddNumber = (EditText) findViewById(R.id.odd_number);
+        evenNumber = (EditText) findViewById(R.id.even_number);
+        sixthFirst = (RadioButton) findViewById(R.id.triangle_angle);
+        seventhFirst = (RadioButton) findViewById(R.id.rectangle);
+        eighthFirst = (RadioButton) findViewById(R.id.square_false);
+        username = (EditText) findViewById(R.id.user_name);
+
+        button.startAnimation(AnimationUtils.loadAnimation(this, R.anim.pulse));
     }
 
     public void showScore(View view) {
-        RadioButton firstFirst = (RadioButton) findViewById(R.id.firstfirst);
+
+        //Q1
         boolean firstAnswer = firstFirst.isChecked();
 
-        CheckBox firstCheckbox = (CheckBox) findViewById(R.id.first_checkbox);
-        CheckBox secondCheckbox = (CheckBox) findViewById(R.id.second_checkbox);
-        CheckBox thirdCheckbox = (CheckBox) findViewById(R.id.third_checkbox);
-        CheckBox fourthCheckbox = (CheckBox) findViewById(R.id.fourth_checkbox);
-
+        //Q2
         boolean secondAnswer1 = firstCheckbox.isChecked();
         boolean secondAnswer2 = secondCheckbox.isChecked();
         boolean secondAnswer3 = thirdCheckbox.isChecked();
         boolean secondAnswer4 = fourthCheckbox.isChecked();
 
-
-
-        EditText sequenceNumber = (EditText) findViewById(R.id.sequence_number);
+        //Q3
         String thirdAnswerText = String.valueOf(sequenceNumber.getText());
         boolean thirdAnswer = false;
         if (thirdAnswerText.equals("34")) {
             thirdAnswer = true;
         }
 
-        EditText oddNumber = (EditText) findViewById(R.id.odd_number);
+        //Q4
         boolean fourthAnswer = false;
         if (oddNumber.getText().toString().equals("")) {
             fourthAnswer = false;
@@ -62,7 +87,7 @@ public class MainActivity extends AppCompatActivity {
             }
         }
 
-        EditText evenNumber = (EditText) findViewById(R.id.even_number);
+        //Q5
         boolean fifthAnswer = false;
         if (evenNumber.getText().toString().equals("")) {
             fifthAnswer = false;
@@ -78,26 +103,23 @@ public class MainActivity extends AppCompatActivity {
             }
         }
 
-        RadioButton sixthFirst = (RadioButton) findViewById(R.id.triangle_angle);
+        //Q6
         boolean sixthAnswer = sixthFirst.isChecked();
 
-        RadioButton seventhFirst = (RadioButton) findViewById(R.id.rectangle);
+        //Q7
         boolean seventhAnswer = seventhFirst.isChecked();
 
-        RadioButton eighthFirst = (RadioButton) findViewById(R.id.square_false);
+        //Q8
         boolean eighthAnswer = eighthFirst.isChecked();
 
-        int score = calculateScore(firstAnswer, secondAnswer1, secondAnswer2, secondAnswer3, secondAnswer4, thirdAnswer, fourthAnswer, fifthAnswer, sixthAnswer, seventhAnswer, eighthAnswer);
+        calculateScore(firstAnswer, secondAnswer1, secondAnswer2, secondAnswer3, secondAnswer4, thirdAnswer, fourthAnswer, fifthAnswer, sixthAnswer, seventhAnswer, eighthAnswer);
 
-        EditText username = (EditText) findViewById(R.id.user_name);
         name = String.valueOf(username.getText());
 
         displayScore(score, name);
     }
 
     public int calculateScore(boolean firstAnswer, boolean secondAnswer1, boolean secondAnswer2, boolean secondAnswer3, boolean secondAnswer4, boolean thirdAnswer, boolean fourthAnswer, boolean fifthAnswer, boolean sixthAnswer, boolean seventhAnswer, boolean eighthAnswer) {
-
-        int score = 0;
 
         if (firstAnswer) {
             score = score + 1;
@@ -132,6 +154,7 @@ public class MainActivity extends AppCompatActivity {
         }
 
         return score;
+
     }
 
     public void displayScore(int score, String name) {
